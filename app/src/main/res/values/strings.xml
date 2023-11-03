@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="switch_txt">Completada</string>
+    <string name="crear_tarea">Crear tarea</string>
+    <string name="titulo_form">Título</string>
+    <string name="description_form">Descripción</string>
+    <string name="boton_crear">Crear tarea</string>
+    <string name="boton_cancelar">Cancelar</string>
+    <string name="boton_compartir">Compartir</string>
+    <string name="boton_editar">Editar</string>
+    <string name="share_text">La tarea con título %1s y descripción %2s esta %3s</string>
+</resources>
