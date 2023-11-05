@@ -11,13 +11,17 @@ import com.alanturing.cpifp.todo.model.Task
 
 class TasksAdapter(private val datos:List<Task>,
                    val onShare:((task: Task)-> Unit),
-                   val onEdit:((task: Task) -> Unit)): RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+                   val onEdit:((task: Task) -> Unit),
+                   val onCompleted:((task: Task, b: Boolean) -> Unit)): RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val binding: TodoItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindTask(t:Task){
             binding.todoTitle.text = t.title
             binding.todoDescription.text = t.description
             binding.todoSw.isChecked = t.isCompleted
+            binding.todoSw.setOnCheckedChangeListener{_, completed ->
+                onCompleted(t, completed)
+            }
             binding.share.setOnClickListener(){
                 onShare(t)
             }

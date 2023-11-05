@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         when (it.resultCode){
             Activity.RESULT_OK -> {
-                binding.tasks.adapter = TasksAdapter(repository.tasks, ::onShareItem, ::onEditItem)
+                binding.tasks.adapter = TasksAdapter(repository.tasks, ::onShareItem, ::onEditItem, ::taskCompleted)
             }
             Activity.RESULT_CANCELED -> {
                 Snackbar.make(this.binding.root,"Se ha cancelado", Snackbar.LENGTH_SHORT).show()
@@ -33,17 +33,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tasks.adapter = TasksAdapter(repository.tasks, ::onShareItem, ::onEditItem)
+        binding.tasks.adapter = TasksAdapter(repository.tasks, ::onShareItem, ::onEditItem, ::taskCompleted)
         //TODO("Crear vista de detalles")
         //TODO("Crear vista de formulario de creacón")
         //TODO("Crear manejador de evento para navegar al formulario de crear")
 
         binding.floatingButton.setOnClickListener(){
             val intent = Intent(this,CreateToDoActivity::class.java)
-            //startActivity(intent)
             getResult.launch(intent)
         }
     }
+
+    fun taskCompleted(task: Task, isCompleted: Boolean) {
+        task.isCompleted = isCompleted
+        repository.update(task)
+    }
+
 
     override fun onResume() {
         super.onResume()

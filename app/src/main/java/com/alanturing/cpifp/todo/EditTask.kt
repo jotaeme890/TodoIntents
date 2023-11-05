@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.alanturing.cpifp.todo.data.TaskLocalRepository
 import com.alanturing.cpifp.todo.databinding.ActivityEditTaskBinding
 import com.alanturing.cpifp.todo.databinding.ActivityMainBinding
@@ -26,7 +27,8 @@ class EditTask : AppCompatActivity() {
             id = t.id
             binding.titleInputEdit.setText(t.title)
             binding.descriptionInputEdit.setText(t.description)
-            binding.switchEdit.isChecked = t.isCompleted
+            Log.d("check", t.isCompleted.toString())
+            binding.switchEdit.isChecked = t!!.isCompleted
         }
 
         binding.btnAceptarEdit.setOnClickListener(){
